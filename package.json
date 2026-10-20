@@ -1,0 +1,31 @@
+{
+  "name": "lab3-services",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lab 3: two-service Node.js and Express scaffold",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:fee": "node src/services/fee/server.js",
+    "start:bank": "node src/services/bank/server.js",
+    "dev:fee": "node --watch src/services/fee/server.js",
+    "dev:bank": "node --watch src/services/bank/server.js",
+    "start:service1": "npm run start:fee",
+    "start:service2": "npm run start:bank",
+    "dev:service1": "npm run dev:fee",
+    "dev:service2": "npm run dev:bank",
+    "check": "node --check src/index.js && node --check src/services/fee/server.js && node --check src/services/fee/service.js && node --check src/services/bank/server.js && node --check src/services/bank/service.js",
+    "test": "node --test",
+    "test:scenario3": "node scripts/scenario3.js",
+    "audit": "node scripts/audit.js",
+    "verify": "npm run check && npm test && npm run audit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

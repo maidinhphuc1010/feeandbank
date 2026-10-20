@@ -1,0 +1,137 @@
+{
+  "timestamp": "2026-10-20T03:45:46.875Z",
+  "node": "v22.12.0",
+  "platform": "win32",
+  "rows": [
+    {
+      "name": "1: Bank down/up",
+      "statuses": {
+        "201": 1,
+        "503": 1
+      },
+      "maxMs": 19.5,
+      "tcp": 1,
+      "attempts": 1,
+      "charges": 1,
+      "duplicates": 0,
+      "bankAmount": 1000,
+      "debt": 0,
+      "checks": {
+        "503 under 1500ms": true,
+        "GET alive, debt unchanged": true,
+        "201 without Fee restart": true,
+        "no duplicate charge": true,
+        "Bank totals consistent": true
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "2: delay 5000, concurrency 20",
+      "statuses": {
+        "504": 20
+      },
+      "maxMs": 1064.22,
+      "tcp": 20,
+      "attempts": 20,
+      "charges": 20,
+      "duplicates": 0,
+      "bankAmount": 20000,
+      "debt": 20000,
+      "checks": {
+        "504 PENDING <=4500ms": true,
+        "concurrent GET max 18.52ms <300": true,
+        "all debt unchanged": true,
+        "no duplicate charge": true,
+        "Bank totals consistent": true
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "3: batch 200 + idle payment",
+      "statuses": {
+        "201": 201
+      },
+      "maxMs": 89.6,
+      "tcp": 11,
+      "attempts": 201,
+      "charges": 201,
+      "duplicates": 0,
+      "bankAmount": 201000,
+      "debt": 0,
+      "checks": {
+        "200/200 HTTP 201": true,
+        "batch TCP 10 <=20": true,
+        "idle 6000ms then 201": true,
+        "all debts zero": true,
+        "no duplicate charge": true,
+        "Bank totals consistent": true
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "4: DROP=0.3",
+      "statuses": {
+        "201": 60
+      },
+      "maxMs": 181.42,
+      "tcp": 18,
+      "attempts": 77,
+      "charges": 60,
+      "duplicates": 0,
+      "bankAmount": 60000,
+      "debt": 0,
+      "checks": {
+        ">=54/60 HTTP 201": true,
+        "<=4500ms": true,
+        "unknown = 504 PENDING": true,
+        "exact student debts": true,
+        "no duplicate charge": true,
+        "Bank totals consistent": true
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "4: FAIL=0.3",
+      "statuses": {
+        "201": 60
+      },
+      "maxMs": 177.18,
+      "tcp": 1,
+      "attempts": 75,
+      "charges": 60,
+      "duplicates": 0,
+      "bankAmount": 60000,
+      "debt": 0,
+      "checks": {
+        ">=54/60 HTTP 201": true,
+        "<=4500ms": true,
+        "unknown = 504 PENDING": true,
+        "exact student debts": true,
+        "no duplicate charge": true,
+        "Bank totals consistent": true
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "4: 25 million",
+      "statuses": {
+        "402": 1
+      },
+      "maxMs": 3.34,
+      "tcp": 1,
+      "attempts": 1,
+      "charges": 0,
+      "duplicates": 0,
+      "bankAmount": 0,
+      "debt": 25000000,
+      "checks": {
+        "402, one attempt": true,
+        "debt unchanged": true,
+        "<=4500ms": true,
+        "no duplicate charge": true,
+        "Bank totals consistent": true
+      },
+      "result": "PASS"
+    }
+  ]
+}
